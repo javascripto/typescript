@@ -3,8 +3,7 @@
 ```bash
 md projeto && cd projeto
 npm init -y
-npm i typescript
-npm i -D live-server
+npm i -D typescript live-server concurrently
 
 md -p src public/js
 touch src/{module1,test}.ts public/index.html

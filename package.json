@@ -4,16 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "node_modules/.bin/tsc -w & cd ./public && ../node_modules/live-server/live-server.js && cd -",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tsc": "node_modules/.bin/tsc -w",
+    "server": "node_modules/.bin/live-server public",
+    "dev": "node_modules/.bin/concurrently \"npm run tsc\" \"npm run server\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "typescript": "^3.3.3333"
-  },
   "devDependencies": {
+    "typescript": "^3.3.3333",
+    "concurrently": "^4.1.0",
     "live-server": "^1.2.1"
   }
 }

@@ -1,2 +1,2 @@
-alert('Funciona');
+alert('Olá Mundo!');
 
