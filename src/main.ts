@@ -1,3 +1,6 @@
+declare var require: any;
+declare var requirejs: any;
+
 require.config({
   baseUrl: "/js",
   paths: {
@@ -9,5 +12,3 @@ require.config({
 requirejs(['test'], function() {
 
 });
-
-
