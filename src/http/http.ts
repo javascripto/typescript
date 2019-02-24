@@ -1,3 +1,7 @@
+// Repo: DefinitelyTyped
+// declare var Promise: any;
+import { Promise } from "../../node_modules/es6-promise/es6-promise";
+
 
 enum HTTPVerbs {
   GET = 'GET',

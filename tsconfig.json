@@ -6,6 +6,8 @@
     "outDir": "public/js",
     "sourceMap": true,
     "inlineSources": true,
+    "typeRoots": ["node_modules/@types"],
+    "types": ["es6-promise"]
   },
   "files": [
     "src/test.ts",
