@@ -1,13 +1,16 @@
 import Page from './page';
+import PostHttp from '../http/post-http';
 
 export default class PostNewPage implements Page {
+  form: HTMLFormElement;
 
-  constructor() {
+  constructor(private postHttp: PostHttp) {
     this.init();
   }
 
   init(): void {
-    document.querySelector('#my-form').addEventListener('submit', event => {
+    this.form = document.querySelector('#my-form');
+    this.form.addEventListener('submit', event => {
       event.preventDefault();
       this.submit();
       return false;
@@ -15,7 +18,9 @@ export default class PostNewPage implements Page {
   }
 
   submit() {
-    alert();
+    const data = new FormData(this.form);
+    this.postHttp.save(data)
+      .then(console.log);
   }
 
   isValid(): boolean {
@@ -24,4 +29,4 @@ export default class PostNewPage implements Page {
 
 }
 
-new PostNewPage;
+new PostNewPage(new PostHttp);

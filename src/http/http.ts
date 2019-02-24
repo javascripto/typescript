@@ -18,7 +18,7 @@ export default class Http {
     });
   }
 
-  post(url: string, payload) {
+  post(url: string, payload): Promise<any> {
     return new Promise((resolve, reject) => {
       const xhr = this.createXHR(HTTPVerbs.POST, url);
       this.configureCallbacks(xhr, resolve, reject);
@@ -37,7 +37,7 @@ export default class Http {
     xhr.onreadystatechange = () => {
       if (xhr.readyState === 4) {
         const response = new Response(xhr.responseText, xhr.status);
-        (xhr.status === 200)
+        (xhr.status >= 200 && xhr.status < 300)
           ? resolve(response)
           : reject(response);
       }
