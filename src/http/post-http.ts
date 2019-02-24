@@ -1,4 +1,5 @@
 import Http from './http';
+import PostTable from '../components/post-table';
 
 export default class PostHttp {
 
@@ -9,9 +10,9 @@ export default class PostHttp {
   }
 
   query() {
-    this.http.get('https://jsonplaceholder.typicode.com/posts/1')
+    this.http.get('https://jsonplaceholder.typicode.com/posts')
       .then(response => response.json())
-      .then(console.log);
+      .then(posts => new PostTable('#my-table > tbody', posts, ['title', 'body']).make());
   }
 
   save() {
