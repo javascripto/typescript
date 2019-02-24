@@ -1,6 +1,7 @@
 // Repo: DefinitelyTyped
-// declare var Promise: any;
-import { Promise } from "../../node_modules/es6-promise/es6-promise";
+// import { Promise } from "../../node_modules/es6-promise/es6-promise";
+import Response from './response';
+declare var Promise: any;
 
 
 enum HTTPVerbs {
@@ -12,7 +13,7 @@ export default class Http {
   get(url: string): Promise<any> {
     return new Promise((resolve, reject) => {
       const xhr = this.createXHR(HTTPVerbs.GET, url);
-      xhr.onreadystatechange = this.onReadyStateChange(xhr, resolve, reject);
+      this.configureCallbacks(xhr, resolve, reject);
       xhr.send();
     });
   }
@@ -20,7 +21,7 @@ export default class Http {
   post(url: string, payload) {
     return new Promise((resolve, reject) => {
       const xhr = this.createXHR(HTTPVerbs.POST, url);
-      xhr.onreadystatechange = this.onReadyStateChange(xhr, resolve, reject);
+      this.configureCallbacks(xhr, resolve, reject);
       xhr.send(payload);
     });
   }
@@ -31,11 +32,15 @@ export default class Http {
     return xhr;
   }
 
-  private onReadyStateChange(xhr: XMLHttpRequest, resolve, reject): () => void {
-    return () => {
-      xhr.readyState === 4 ? xhr.status === 200 
-        ? resolve(xhr.responseText)
-        : reject(xhr.status) : null;
-    }
+
+  private configureCallbacks(xhr: XMLHttpRequest, resolve, reject) {
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4) {
+        const response = new Response(xhr.responseText, xhr.status);
+        (xhr.status === 200)
+          ? resolve(response)
+          : reject(response);
+      }
+    };
   }
 }

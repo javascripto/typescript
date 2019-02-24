@@ -10,7 +10,7 @@ export default class PostHttp {
 
   query() {
     this.http.get('https://jsonplaceholder.typicode.com/posts/1')
-      .then(JSON.parse)
+      .then(response => response.json())
       .then(console.log);
   }
 
