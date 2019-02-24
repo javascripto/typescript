@@ -1,5 +1,4 @@
 // import 'module1';
-import PostHttp from 'http/post-http';
-
-new PostHttp().query();
+// import PostListPage from './page/post-list-page';
+// import './page/post-list-page';
 
